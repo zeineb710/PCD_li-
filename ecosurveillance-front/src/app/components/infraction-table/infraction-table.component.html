@@ -1,0 +1,30 @@
+<div class="table-wrapper">
+  <table class="infractions-table">
+    <thead>
+    <tr>
+      <th>Etudiant</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Punition</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let infraction of infractions"
+        (click)="onEdit(infraction)"
+        class="clickable-row"
+        title="Cliquer pour modifier">
+      <td class="bold-text">{{ infraction.etudiantNom }}</td>
+      <td>{{ (infraction.preuves && infraction.preuves.length > 0) ? infraction.preuves[0].description : '-' }}</td>
+      <td>{{ infraction.date | date:'dd/MM/yy' }}</td>
+      <td>{{ infraction.punitionDescription || '-' }}</td>
+      <td>
+          <span class="status-badge"
+                [ngClass]="infraction.status === 'TERMINE' ? 'termine' : 'en-attente'">
+            {{ infraction.status === 'TERMINE' ? 'Terminé' : 'En attente' }}
+          </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
